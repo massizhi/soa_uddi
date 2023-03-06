@@ -62,7 +62,7 @@
         </el-col>
       </el-row>
       <pre class="one">    </pre>
-      <pre style="color: ghostwhite; font-size: 10px;">Copyright @福州大学数学与计算机科学学院 马科学</pre>
+      <pre style="color: ghostwhite; font-size: 10px;">Copyright @XX大学数学与计算机科学学院 XXX</pre>
       <pre class="one">    </pre>
     </div>
   </div>
