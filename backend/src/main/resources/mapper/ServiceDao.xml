@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mkx.soa.dao.ServiceDao">
+    <insert id="insertService" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.mkx.soa.entity.Service">
+        INSERT INTO
+        service(name,providerId,wsdl,pictureUrl)
+        VALUES
+        (#{name},#{providerId},#{wsdl},#{pictureUrl})
+    </insert>
+
+    <delete id="deleteService">
+        DELETE FROM
+        service
+        WHERE
+        id = #{id}
+    </delete>
+
+    <update id="updateService" parameterType="com.mkx.soa.entity.Service">
+        UPDATE service
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="wsdl != null">wsdl=#{wsdl},</if>
+            <if test="pictureUrl != null">pictureUrl=#{pictureUrl},</if>
+        </set>
+        WHERE
+        id=#{id}
+    </update>
+
+    <select id="queryService" resultType="com.mkx.soa.entity.Service">
+        SELECT *
+        FROM service
+        ORDER BY id
+        ASC
+    </select>
+
+    <select id="getServiceById" resultType="com.mkx.soa.entity.Service">
+        SELECT *
+        FROM service
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="getServiceByName" resultType="com.mkx.soa.entity.Service">
+        SELECT *
+        FROM service
+        WHERE
+        name like '%${name}%'
+    </select>
+
+    <select id="getServiceByProviderId" resultType="com.mkx.soa.entity.Service">
+        SELECT *
+        FROM service
+        WHERE
+        providerId=#{providerId}
+    </select>
+</mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mkx.soa.dao.ServiceProviderDao">
+    <insert id="insertServiceProvider" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.mkx.soa.entity.ServiceProvider">
+        INSERT INTO
+        service_provider(name,location,briefInfo,url,password)
+        VALUES
+        (#{name},#{location},#{briefInfo},#{url},#{password})
+    </insert>
+
+    <delete id="deleteServiceProvider">
+        DELETE FROM
+        service_provider
+        WHERE
+        id = #{id}
+    </delete>
+
+    <update id="updateServiceProvider" parameterType="com.mkx.soa.entity.ServiceProvider">
+        UPDATE service_provider
+        <set>
+            <if test="location != null">location=#{location},</if>
+            <if test="briefInfo != null">briefInfo=#{briefInfo},</if>
+            <if test="url != null">url=#{url},</if>
+            <if test="password != null">password=#{password},</if>
+        </set>
+        WHERE
+        id=#{id}
+    </update>
+
+    <select id="queryServiceProvider" resultType="com.mkx.soa.entity.ServiceProvider">
+        SELECT *
+        FROM service_provider
+        ORDER BY id
+        ASC
+    </select>
+
+    <select id="getServiceProviderById" resultType="com.mkx.soa.entity.ServiceProvider">
+        SELECT *
+        FROM service_provider
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="getServiceProviderByName" resultType="com.mkx.soa.entity.ServiceProvider">
+        SELECT *
+        FROM service_provider
+        WHERE
+        name=#{name}
+    </select>
+
+    <select id="getPasswordByName" resultType="java.lang.String">
+        SELECT password
+        FROM service_provider
+        WHERE
+        name=#{name}
+    </select>
+
+    <select id="getNumberByLocation" resultType="int">
+        SELECT COUNT(*)
+        FROM service_provider
+        WHERE
+        location=#{location}
+    </select>
+</mapper>

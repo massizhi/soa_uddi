@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mkx.soa.dao.ServiceConsumerDao">
+    <insert id="insertServiceConsumer" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.mkx.soa.entity.ServiceConsumer">
+        INSERT INTO
+        service_consumer(name,briefInfo,url,password)
+        VALUES
+        (#{name},#{briefInfo},#{url},#{password})
+    </insert>
+
+    <delete id="deleteServiceConsumer">
+        DELETE FROM
+        service_consumer
+        WHERE
+        id = #{id}
+    </delete>
+
+    <update id="updateServiceConsumer" parameterType="com.mkx.soa.entity.ServiceConsumer">
+        UPDATE service_consumer
+        <set>
+            <if test="briefInfo != null">briefInfo=#{briefInfo},</if>
+            <if test="url != null">url=#{url},</if>
+            <if test="password != null">password=#{password},</if>
+        </set>
+        WHERE
+        id=#{id}
+    </update>
+
+    <select id="queryServiceConsumer" resultType="com.mkx.soa.entity.ServiceConsumer">
+        SELECT *
+        FROM service_consumer
+        ORDER BY id
+        ASC
+    </select>
+
+    <select id="getServiceConsumerById" resultType="com.mkx.soa.entity.ServiceConsumer">
+        SELECT *
+        FROM service_consumer
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="getServiceConsumerByName" resultType="com.mkx.soa.entity.ServiceConsumer">
+        SELECT *
+        FROM service_consumer
+        WHERE
+        name=#{name}
+    </select>
+
+    <select id="getPasswordByName" resultType="java.lang.String">
+        SELECT password
+        FROM service_consumer
+        WHERE
+        name=#{name}
+    </select>
+</mapper>

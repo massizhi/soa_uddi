@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mkx.soa.dao.RecordDao">
+    <insert id="insertRecord" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.mkx.soa.entity.Record">
+        INSERT INTO
+        record(administratorId,objectName,objectClass,choice)
+        VALUES
+        (#{administratorId},#{objectName},#{objectClass},#{choice})
+    </insert>
+
+    <select id="queryRecord" resultType="com.mkx.soa.entity.Record">
+        SELECT *
+        FROM record
+        ORDER BY id
+        ASC
+    </select>
+
+    <select id="getRecordById" resultType="com.mkx.soa.entity.Record">
+        SELECT *
+        FROM record
+        WHERE
+        id=#{id}
+    </select>
+
+    <select id="getRecordByAdministratorId" resultType="com.mkx.soa.entity.Record">
+        SELECT *
+        FROM record
+        WHERE
+        administratorId=#{administratorId}
+    </select>
+
+    <select id="getRecordByObjectClass" resultType="com.mkx.soa.entity.Record">
+        SELECT *
+        FROM record
+        WHERE
+        administratorId=#{administratorId}
+        AND
+        objectClass=#{objectClass}
+    </select>
+
+    <select id="getRecordByObjectName" resultType="com.mkx.soa.entity.Record">
+        SELECT *
+        FROM record
+        WHERE
+        administratorId=#{administratorId}
+        AND
+        objectName=#{objectName}
+    </select>
+</mapper>

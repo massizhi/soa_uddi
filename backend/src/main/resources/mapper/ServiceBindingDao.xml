@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mkx.soa.dao.ServiceBindingDao">
+    <insert id="insertServiceBinding" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.mkx.soa.entity.ServiceBinding">
+        INSERT INTO
+        service_binding(consumerId,serviceId)
+        VALUES
+        (#{consumerId},#{serviceId})
+    </insert>
+
+    <delete id="deleteServiceBinding">
+        DELETE FROM
+        service_binding
+        WHERE
+        consumerId = #{consumerId}
+        AND
+        serviceId = #{serviceId}
+    </delete>
+
+    <select id="queryServiceBinding" resultType="com.mkx.soa.entity.ServiceBinding">
+        SELECT *
+        FROM service_binding
+        ORDER BY serviceId
+        ASC
+    </select>
+
+    <select id="getServiceBindingById" resultType="com.mkx.soa.entity.ServiceBinding">
+        SELECT *
+        FROM service_binding
+        WHERE
+        id = #{id}
+    </select>
+
+    <select id="getServiceBindingByConsumerId" resultType="java.lang.Integer">
+        SELECT serviceId
+        FROM service_binding
+        WHERE
+        consumerId = #{consumerId}
+    </select>
+
+    <select id="getServiceBindingByServiceId" resultType="java.lang.Integer">
+        SELECT consumerId
+        FROM service_binding
+        WHERE
+        serviceId = #{serviceId}
+    </select>
+
+    <select id="getConsumerNumber" resultType="int">
+        SELECT COUNT(*)
+        FROM service_binding
+        WHERE
+        serviceId = #{serviceId}
+    </select>
+</mapper>
